@@ -25,6 +25,10 @@
   border: 0;
   border-radius: .2em;
 }
+
+.hidden{
+  display: none;
+}
 .footer {
   display: flex;
   flex: 1;

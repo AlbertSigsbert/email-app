@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-
   return (
     <div className={styles.container}>
       <Head>
@@ -11,12 +10,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       <main className={styles.main}>
         <h1 className={styles.title}>Contact Form</h1>
         <div className={styles.grid}>
-          <form name="contact" className={styles.form} method="POST" data-netlify="true" >
+          <form
+            name="contact"
+            className={styles.form}
+            method="POST"
+            netlify-honeypot="bot-field"
+            data-netlify="true"
+          >
             <input type="hidden" name="form-name" value="contact" />
+            <p>
+                <input name="bot-field"  className={styles.hidden}/>
+            </p>
             <p>
               <label htmlFor="name">Name:</label>
               <input type="text" id="name" name="name" />
@@ -27,7 +34,7 @@ export default function Home() {
             </p>
             <p>
               <label htmlFor="message">Message:</label>
-               <textarea  id="message" name="message"/>
+              <textarea id="message" name="message" />
             </p>
             <p>
               <button>Submit</button>
