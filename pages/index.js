@@ -2,19 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  async function handleSubmit(e){
-     e.preventDefault();
-     const formData = {};
-     Array.from(e.currentTarget.elements).forEach(field => {
-        if(!field.name) return;
-        formData[field.name] = field.value;
-     });
 
-      fetch('/api/mail', {
-        method:'post',
-        body:JSON.stringify(formData)
-      })
-  }
   return (
     <div className={styles.container}>
       <Head>
@@ -27,7 +15,8 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.title}>Contact Form</h1>
         <div className={styles.grid}>
-          <form className={styles.form} method="POST" onSubmit={handleSubmit}>
+          <form name="contact" className={styles.form} method="POST" data-netlify="true" >
+            <input type="hidden" name="form-name" value="contact" />
             <p>
               <label htmlFor="name">Name:</label>
               <input type="text" id="name" name="name" />
