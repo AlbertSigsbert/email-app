@@ -12,6 +12,19 @@
   align-items: center;
 }
 
+
+.form label{
+     display: block;
+     margin-bottom: .2em;
+}
+
+.form button{
+  color: white;
+  background-color: #43e2ad;
+  padding: .8em 1em;
+  border: 0;
+  border-radius: .2em;
+}
 .footer {
   display: flex;
   flex: 1;

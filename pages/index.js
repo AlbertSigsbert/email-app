@@ -1,8 +1,20 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 
 export default function Home() {
+  async function handleSubmit(e){
+     e.preventDefault();
+     const formData = {};
+     Array.from(e.currentTarget.elements).forEach(field => {
+        if(!field.name) return;
+        formData[field.name] = field.value;
+     });
+
+      fetch('/api/mail', {
+        method:'post',
+        body:JSON.stringify(formData)
+      })
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -11,59 +23,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
+        <h1 className={styles.title}>Contact Form</h1>
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
+          <form className={styles.form} method="POST" onSubmit={handleSubmit}>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              <label htmlFor="name">Name:</label>
+              <input type="text" id="name" name="name" />
             </p>
-          </a>
+            <p>
+              <label htmlFor="email">Email:</label>
+              <input type="email" id="email" name="email" />
+            </p>
+            <p>
+              <label htmlFor="message">Message:</label>
+               <textarea  id="message" name="message"/>
+            </p>
+            <p>
+              <button>Submit</button>
+            </p>
+          </form>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
